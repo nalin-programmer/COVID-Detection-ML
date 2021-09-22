@@ -3,13 +3,16 @@ import Footer from "./Footer";
 import Main from "./Main";
 function App() {
   return (
-    <div className="grid-container">
-      <main>
+    <div style={{ width: "100%", height: "100vh" }}>
+      <div style={{ width: "100%", height: "74%" }}>
         <Main />
-      </main>
-      <footer>
+      </div>
+      <div
+        style={{ width: "100%", z: "10", position: "fixed" }}
+        className="footer"
+      >
         <Footer />
-      </footer>
+      </div>
     </div>
   );
 }

@@ -44,7 +44,7 @@ main {
   min-height: 70% !important;
 }
 
-footer {
+.footer {
   grid-area: footer;
   background-color: #072a40;
   color: #f9f7f0;

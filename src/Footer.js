@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div style={{ width: "100%" }}>
       <div style={{ width: "100%", textAlign: "center" }}>
-        All rights reserverd
+        All rights reserverd®️
       </div>
       <div style={{ width: "100%", display: "flex" }}>
         <div style={{ width: "50%", textAlign: "center" }}>
