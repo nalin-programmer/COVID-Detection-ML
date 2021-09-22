@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+main {
+  font-family: "Trebuchet MS";
+  grid-area: main;
+  position: relative;
+  min-height: 70% !important;
+}
+
+footer {
+  grid-area: footer;
+  background-color: #072a40;
+  color: #f9f7f0;
+
+  /* transform: translate(0%, -3.75976543%); */
+}
