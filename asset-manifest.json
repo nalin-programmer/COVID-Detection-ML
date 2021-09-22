@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/COVID-Detection-ML/static/css/main.bd6ee21f.chunk.css",
+    "main.js": "/COVID-Detection-ML/static/js/main.6818e8e0.chunk.js",
+    "main.js.map": "/COVID-Detection-ML/static/js/main.6818e8e0.chunk.js.map",
+    "runtime-main.js": "/COVID-Detection-ML/static/js/runtime-main.879bd010.js",
+    "runtime-main.js.map": "/COVID-Detection-ML/static/js/runtime-main.879bd010.js.map",
+    "static/js/2.73ac3d6a.chunk.js": "/COVID-Detection-ML/static/js/2.73ac3d6a.chunk.js",
+    "static/js/2.73ac3d6a.chunk.js.map": "/COVID-Detection-ML/static/js/2.73ac3d6a.chunk.js.map",
+    "static/js/3.101c8ae8.chunk.js": "/COVID-Detection-ML/static/js/3.101c8ae8.chunk.js",
+    "static/js/3.101c8ae8.chunk.js.map": "/COVID-Detection-ML/static/js/3.101c8ae8.chunk.js.map",
+    "index.html": "/COVID-Detection-ML/index.html",
+    "static/css/main.bd6ee21f.chunk.css.map": "/COVID-Detection-ML/static/css/main.bd6ee21f.chunk.css.map",
+    "static/js/2.73ac3d6a.chunk.js.LICENSE.txt": "/COVID-Detection-ML/static/js/2.73ac3d6a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.879bd010.js",
+    "static/js/2.73ac3d6a.chunk.js",
+    "static/css/main.bd6ee21f.chunk.css",
+    "static/js/main.6818e8e0.chunk.js"
+  ]
+}
