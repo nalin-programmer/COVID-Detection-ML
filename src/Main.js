@@ -4,20 +4,21 @@ export default function Main() {
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <center>
-        <h1 style={{ color: "#072a40" }}>Covid 19 Prediction</h1>
+        <h1 style={{ color: "#072a40", fontSize: "2rem" }}>Covid 19 Prediction</h1>
       </center>
       <div style={{ width: "100%", textAlign: "center" }}>
         <div
           style={{
-            width: "90%",
-            margin: "20px",
+            width: "100%",
+            margin: "10px",
             padding: "10px",
             textAlign: "left",
             border: "1px solid #888888",
             boxShadow: "5px 2px 10px #888888",
+            borderRadius: "10px"
           }}
         >
-          <h2>What is Covid-19?</h2>
+          <center><h2 style={{color: "#ff5f00"}}>What is Covid-19?</h2></center>
           <p>
             COVID-19 is a new strain of coronavirus that has not been previously
             identified in humans. The COVID-19 is the cause of an outbreak of
