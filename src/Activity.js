@@ -10,8 +10,28 @@ export const Activity = () => {
   const [imgUrl, setimgUrl] = useState("");
   var url = "";
 
+  let base64String = "";
+
+  function imageUploaded(image) {
+    var file = image;
+
+    var reader = new FileReader();
+    console.log("next");
+
+    reader.onload = function () {
+      base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+
+      // imageBase64Stringsep = base64String;
+
+      // alert(imageBase64Stringsep);
+      console.log(base64String);
+    };
+    reader.readAsDataURL(file);
+  }
+
   function PostData(e) {
     e.preventDefault();
+    imageUploaded(image);
     console.log("POSTING DATA...");
     const fileType = image["type"];
     const validImageTypes = ["image/jpg", "image/jpeg", "image/png"];
@@ -39,7 +59,7 @@ export const Activity = () => {
     async function API() {
       const responce = await fetch("localhost/api", {
         method: "post",
-        body: image,
+        body: base64String,
       })
         .then((res) => res.json())
         .then((data) => {
@@ -65,7 +85,7 @@ export const Activity = () => {
     setimage(e.target.files[0]);
     setimgUrl(URL.createObjectURL(e.target.files[0]));
     console.log("HHIII");
-    console.log(image);
+    console.log(e.target.files[0]);
   }
 
   return (
