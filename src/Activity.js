@@ -36,26 +36,19 @@ export const Activity = () => {
       position: toast.POSITION.TOP_CENTER,
     });
 
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "gifter");
-    data.append("cloud_name", "prerit-cloud");
     async function API() {
-      const responce = await fetch(
-        "https://api.cloudinary.com/v1_1/prerit-cloud/image/upload",
-        {
-          method: "post",
-          body: data,
-        }
-      )
+      const responce = await fetch("localhost/api", {
+        method: "post",
+        body: image,
+      })
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);
           toast.success("Image Upload Sucessful ! Wait a Moment !", {
             position: toast.POSITION.TOP_CENTER,
           });
-          url = data.url;
-          console.log(url);
+          // url = data.url;
+          // console.log(url);
         })
         .catch((err) => {
           // console.log(err);
@@ -71,6 +64,8 @@ export const Activity = () => {
   function handleChange(e) {
     setimage(e.target.files[0]);
     setimgUrl(URL.createObjectURL(e.target.files[0]));
+    console.log("HHIII");
+    console.log(image);
   }
 
   return (
