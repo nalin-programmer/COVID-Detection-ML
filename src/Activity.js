@@ -8,9 +8,11 @@ toast.configure();
 export const Activity = () => {
   const [image, setimage] = useState("");
   const [imgUrl, setimgUrl] = useState("");
+  const [base64String, setBase64String] = useState("");
+  const [result,setResult] = useState("");
   var url = "";
 
-  let base64String = "";
+  
 
   function imageUploaded(image) {
     var file = image;
@@ -19,20 +21,17 @@ export const Activity = () => {
     console.log("next");
 
     reader.onload = function () {
-      base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+      setBase64String(reader.result.replace("data:", "").replace(/^.+,/, ""));
 
-      // imageBase64Stringsep = base64String;
-
-      // alert(imageBase64Stringsep);
-      console.log(base64String);
     };
     reader.readAsDataURL(file);
   }
 
   function PostData(e) {
     e.preventDefault();
-    imageUploaded(image);
+    
     console.log("POSTING DATA...");
+    //console.log(base64String);
     const fileType = image["type"];
     const validImageTypes = ["image/jpg", "image/jpeg", "image/png"];
     if (!validImageTypes.includes(fileType)) {
@@ -57,18 +56,48 @@ export const Activity = () => {
     });
 
     async function API() {
-      const responce = await fetch("localhost/api", {
-        method: "post",
-        body: base64String,
-      })
+      const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "gifter");
+    data.append("cloud_name", "prerit-cloud");
+      const responce = await fetch(
+        "https://api.cloudinary.com/v1_1/prerit-cloud/image/upload",
+        {
+          method: "post",
+          body: data,
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);
           toast.success("Image Upload Sucessful ! Wait a Moment !", {
             position: toast.POSITION.TOP_CENTER,
           });
-          // url = data.url;
-          // console.log(url);
+          url = data.url;
+          console.log(url);
+          setResult("Sending request...");
+          fetch("http://127.0.0.1:5000/predict", {
+            method: "post",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ img: url }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              toast.success("Image Upload Sucessful ! Wait a Moment !", {
+                position: toast.POSITION.TOP_CENTER,
+              });
+              setResult(data);
+              // url = data.url;
+              // console.log(url);
+            })
+            .catch((err) => {
+              // console.log(err);
+              toast.error("Image Upload Failed , Retry? ", {
+                position: toast.POSITION.TOP_CENTER,
+              });
+              return;
+            });
         })
         .catch((err) => {
           // console.log(err);
@@ -77,8 +106,13 @@ export const Activity = () => {
           });
           return;
         });
+      
     }
+    // while(base64String==''){
+      
+    // }
     API();
+    
   }
 
   function handleChange(e) {
@@ -86,6 +120,7 @@ export const Activity = () => {
     setimgUrl(URL.createObjectURL(e.target.files[0]));
     console.log("HHIII");
     console.log(e.target.files[0]);
+    imageUploaded(e.target.files[0]);
   }
 
   return (
@@ -131,9 +166,24 @@ export const Activity = () => {
             </span>
           </div>
         </label>
-        <span id="file-upload-btn" class="btn btn-primary" onClick={PostData}>
+        {
+          result==="Sending request..."
+          ?
+          <img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif"></img>
+          :
+          <span id="file-upload-btn" class="btn btn-primary" onClick={PostData}>
           Submit
-        </span>
+          </span>
+        }
+        
+        <br></br>
+        {
+          result!=="" && result!=="Sending request..."
+          ?
+          <p>{"Result = " + result}</p>
+          :
+          <div></div>
+        }
       </form>
       <br />
     </div>
