@@ -9,10 +9,8 @@ export const Activity = () => {
   const [image, setimage] = useState("");
   const [imgUrl, setimgUrl] = useState("");
   const [base64String, setBase64String] = useState("");
-  const [result,setResult] = useState("");
+  const [result, setResult] = useState("");
   var url = "";
-
-  
 
   function imageUploaded(image) {
     var file = image;
@@ -22,14 +20,13 @@ export const Activity = () => {
 
     reader.onload = function () {
       setBase64String(reader.result.replace("data:", "").replace(/^.+,/, ""));
-
     };
     reader.readAsDataURL(file);
   }
 
   function PostData(e) {
     e.preventDefault();
-    
+
     console.log("POSTING DATA...");
     //console.log(base64String);
     const fileType = image["type"];
@@ -57,9 +54,9 @@ export const Activity = () => {
 
     async function API() {
       const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "gifter");
-    data.append("cloud_name", "prerit-cloud");
+      data.append("file", image);
+      data.append("upload_preset", "gifter");
+      data.append("cloud_name", "prerit-cloud");
       const responce = await fetch(
         "https://api.cloudinary.com/v1_1/prerit-cloud/image/upload",
         {
@@ -78,7 +75,7 @@ export const Activity = () => {
           setResult("Sending request...");
           fetch("http://127.0.0.1:5000/predict", {
             method: "post",
-            headers: { 'Content-Type': 'application/json' },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ img: url }),
           })
             .then((res) => res.json())
@@ -106,13 +103,11 @@ export const Activity = () => {
           });
           return;
         });
-      
     }
     // while(base64String==''){
-      
+
     // }
     API();
-    
   }
 
   function handleChange(e) {
@@ -166,24 +161,23 @@ export const Activity = () => {
             </span>
           </div>
         </label>
-        {
-          result==="Sending request..."
-          ?
+        {result === "Sending request..." ? (
           <img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif"></img>
-          :
+        ) : (
           <span id="file-upload-btn" class="btn btn-primary" onClick={PostData}>
-          Submit
+            Submit
           </span>
-        }
-        
+        )}
+
         <br></br>
-        {
-          result!=="" && result!=="Sending request..."
-          ?
-          <p>{"Result = " + result}</p>
-          :
+        {result !== "" && result !== "Sending request..." ? (
+          <p>
+            {"Result = "} +
+            {result.idx_resnet == 0 ? "Covid Positve" : "Covid Negative"}
+          </p>
+        ) : (
           <div></div>
-        }
+        )}
       </form>
       <br />
     </div>
